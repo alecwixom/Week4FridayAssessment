@@ -1,5 +1,4 @@
-let db = []
-let globalId = 1
+let movies = []
 
 module.exports = {
 
@@ -23,34 +22,33 @@ module.exports = {
         res.status(200).send(randomCompliment);
     },
 
-    getItems: (req, res) => {
-        res.status(200).send(db)
+    getMovies: (req,res) => {
+        res.status(200).send(movies)
+    },
+    
+    addMovie: (req, res) => {
+        let {title} = req.body
+
+        if(!title) {
+            res.send(400).send('New Movies must have a title, rating and an image URL!')
+        } else {
+            let newMovie = {
+                title
+            }
+            movies.push(newMovie)
+
+            res.status(200).send(movies)
+        }
     },
 
-    addItem: (req, res) => {
-        if(!title){
-            res.send(400).send('New text must have a text')
-        } else{
-        let newItem = {
-            textName,
-            id:globalId
-        }
-        db.push(newItem)
-
-        res.status(200).send(db)
-
-        globalId++
-        }
-    },
-
-    deletItem: (req, res) => {
+    deleteMovie: (req, res) => {
         let {id} = req.params
 
-        let index = db.findIndex(item => +db.id === +id)
+        let index = movies.findIndex(movie => +movies.id === +id)
 
-        db.splice(index, 1)
-
-        res.status(200).send(db)
+        movies.splice(index, 1)
+        
+        res.status(200).send(movies)
     }
 
 }

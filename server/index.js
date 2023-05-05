@@ -6,12 +6,13 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const { getCompliment, getNewCompliment, addItem, deletItem } = require('./controller')
+const { getCompliment, getNewCompliment, getMovies, addMovie, deleteMovie } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
 app.get("/api/newCompliment", getNewCompliment)
+app.get('/api/movies', getMovies)
+app.post('/api/movies', addMovie)
+app.put('/api/movies/:', deleteMovie)
 
-app.post('/api/db', addItem)
-app.delete('/api/db/:id', deletItem)
 
 app.listen(4000, () => console.log("Server running on 4000"));

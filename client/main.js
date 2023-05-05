@@ -1,13 +1,17 @@
 const complimentBtn = document.getElementById("complimentButton")
 const newCompBtn = document.getElementById("newComp")
+
+const moviesContainer = document.querySelector('#movies-container')
 const form = document.querySelector('form')
 
-const baseURL = `http://localhost:4000/api/db`
+const baseURL = `http://localhost:4000/api/movies`
 
-const textCallback = ({data: db}) => displayText(db)
+const moviesCallback = ({ data: movies }) => displayMovies(movies)
 const errCallback = err => console.log(err.response.data)
 
-const createText = body => axios.post(baseURL, body).then(textCallback).catch(errCallback)
+const getAllMovies = () => axios.get(baseURL).then(moviesCallback).catch(errCallback)
+const createMovie = body => axios.post(baseURL, body).then(moviesCallback).catch(errCallback)
+const deleteMovie = id => axios.delete(`${baseURL}/${id}`).then(moviesCallback).catch(errCallback)
 
 
 const getCompliment = () => {
@@ -33,29 +37,38 @@ newCompBtn.addEventListener('click', getNewCompliment)
 function submitHandler(e) {
     e.preventDefault()
 
-    let title = document.querySelector('#textName')
+    let title = document.querySelector('#title')
 
     let bodyObj = {
         title: title.value,
-}
-createText(bodyObj)
+    }
+
+    createMovie(bodyObj)
 
     title.value = ''
 }
 
-function createItem(item) {
-    const itemCard = document.createElement('div')
-    itemCard.classList.add('item-card')
+function createMovieCard(movie) {
+    const movieCard = document.createElement('div')
+    movieCard.classList.add('movie-card')
 
-    itemCard.innerHTML = `<p class="item-title">${item.textName}</p>`
+    movieCard.innerHTML = `<p class="movie-title">${movie.title}</p>
+    <div class="btns-container">
+    </div>
+    <button onclick="deleteMovie(${movie.id})">delete</button>
+    `
 
+
+    moviesContainer.appendChild(movieCard)
 }
 
-function displayText(arr) {
-    itemCard.innerHTML = ``
-    for(let i = 0; i < arr.length; i++) {
-        createItem(arr[i])
+function displayMovies(arr) {
+    moviesContainer.innerHTML = ``
+    for (let i = 0; i < arr.length; i++) {
+        createMovieCard(arr[i])
     }
 }
+
 form.addEventListener('submit', submitHandler)
 
+getAllMovies()
