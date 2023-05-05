@@ -1,5 +1,5 @@
 let movies = []
-
+let globalId = 1
 module.exports = {
 
     getCompliment: (req, res) => {
@@ -30,14 +30,17 @@ module.exports = {
         let {title} = req.body
 
         if(!title) {
-            res.send(400).send('New Movies must have a title, rating and an image URL!')
+            res.send(400).send('Invalid Movie')
         } else {
             let newMovie = {
-                title
+                title,
+                id:globalId
             }
             movies.push(newMovie)
 
             res.status(200).send(movies)
+
+            globalId++
         }
     },
 
