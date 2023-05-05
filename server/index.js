@@ -6,12 +6,12 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const { getCompliment, getNewCompliment, getMovies, addMovie, deleteText } = require('./controller')
+const { getCompliment, getNewCompliment, getMovies, addText, deleteText } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
 app.get("/api/newCompliment", getNewCompliment)
 app.get('/api/movies', getMovies)
-app.post('/api/movies', addMovie)
+app.post('/api/movies', addText)
 app.delete('/api/movies/:id', deleteText)
 
 

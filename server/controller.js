@@ -26,7 +26,7 @@ module.exports = {
         res.status(200).send(movies)
     },
     
-    addMovie: (req, res) => {
+    addText: (req, res) => {
         let {title} = req.body
 
         if(!title) {
