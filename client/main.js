@@ -12,7 +12,7 @@ const errCallback = err => console.log(err.response.data)
 const getAllMovies = () => axios.get(baseURL).then(moviesCallback).catch(errCallback)
 const createMovie = body => axios.post(baseURL, body).then(moviesCallback).catch(errCallback)
 const deleteText = id => axios.delete(`${baseURL}/${id}`).then(moviesCallback).catch(errCallback)
-const updateText = id => axios.put(`${baseURL}/${id}`).then(moviesCallback).catch(errCallback)
+const updateText = id => axios.put(`${baseURL}/${id}`, { id }).then(moviesCallback).catch(errCallback)
 
 
 const getCompliment = () => {

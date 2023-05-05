@@ -55,18 +55,19 @@ module.exports = {
     },
 
     updateText: (req, res) => {
-        let {id} = req.params
-
-        let index = movies.findIndex(movie => +movie.id === +id)
-
-        let newArr = []
-
-        newArr.push(movies[index])
-        movies.splice(index, 1)
-        newArr.toUpperCase()
-        movies.push(newArr[index])
-
-        res.status(200).send(movies)
+        const { id } = req.params;
+        const index = movies.findIndex(movie => +movie.id === +id);
+        
+        if (index === -1) {
+        return res.status(404).send('Movie not found');
+        }
+        
+        const movie = movies[index];
+        movies.splice(index, 1);
+        movie.title = movie.title.toUpperCase();
+        movies.push(movie);
+    
+        res.status(200).send(movies);
     }
 
 }
