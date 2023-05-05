@@ -44,7 +44,7 @@ module.exports = {
         }
     },
 
-    deleteMovie: (req, res) => {
+    deleteText: (req, res) => {
         let {id} = req.params
 
         let index = movies.findIndex(movie => +movies.id === +id)

@@ -11,7 +11,7 @@ const errCallback = err => console.log(err.response.data)
 
 const getAllMovies = () => axios.get(baseURL).then(moviesCallback).catch(errCallback)
 const createMovie = body => axios.post(baseURL, body).then(moviesCallback).catch(errCallback)
-const deleteMovie = id => axios.delete(`${baseURL}/${id}`).then(moviesCallback).catch(errCallback)
+const deleteText = id => axios.delete(`${baseURL}/${id}`).then(moviesCallback).catch(errCallback)
 
 
 const getCompliment = () => {
@@ -55,7 +55,7 @@ function createMovieCard(movie) {
     movieCard.innerHTML = `<p class="movie-title">${movie.title}</p>
     <div class="btns-container">
     </div>
-    <button onclick="deleteMovie(${movie.id})">delete</button>
+    <button onclick="deleteText(${movie.id})">delete</button>
     `
 
 
