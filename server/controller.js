@@ -52,6 +52,21 @@ module.exports = {
         movies.splice(index, 1)
         
         res.status(200).send(movies)
+    },
+
+    updateText: (req, res) => {
+        let {id} = req.params
+
+        let index = movies.findIndex(movie => +movie.id === +id)
+
+        let newArr = []
+
+        newArr.push(movies[index])
+        movies.splice(index, 1)
+        newArr.toUpperCase()
+        movies.push(newArr[index])
+
+        res.status(200).send(movies)
     }
 
 }
