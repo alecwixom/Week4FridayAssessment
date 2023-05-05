@@ -12,7 +12,7 @@ app.get("/api/compliment", getCompliment);
 app.get("/api/newCompliment", getNewCompliment)
 app.get('/api/movies', getMovies)
 app.post('/api/movies', addMovie)
-app.put('/api/movies/:', deleteMovie)
+app.put('/api/movies/:id', deleteMovie)
 
 
 app.listen(4000, () => console.log("Server running on 4000"));
